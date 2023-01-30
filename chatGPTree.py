@@ -11,12 +11,7 @@ class GPT3Bot(irc.bot.SingleServerIRCBot):
 
     def on_welcome(self, c, e):
         c.join(self.channel)
-        print("Channel joined")
-
-    def on_privmsg(self, c, e):
-        sender = e.source.nick
-        print("Private message")
-        self.do_commandpriv(e, e.arguments[0], sender)
+        print("Joined channel " = str(self.channel))
 
     def on_pubmsg(self, c, e):
         print("Public message")
