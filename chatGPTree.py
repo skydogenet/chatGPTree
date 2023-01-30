@@ -11,7 +11,7 @@ class GPT3Bot(irc.bot.SingleServerIRCBot):
 
     def on_welcome(self, c, e):
         c.join(self.channel)
-        print("Joined channel " = str(self.channel))
+        print("Joined channel " + str(self.channel))
 
     def on_pubmsg(self, c, e):
         print("Public message")
@@ -19,27 +19,6 @@ class GPT3Bot(irc.bot.SingleServerIRCBot):
         if len(a) > 1 and irc.strings.lower(a[0]) == irc.strings.lower(self.connection.get_nickname()):
             self.do_command(e, a[1].strip())
         return
-
-    def do_commandpriv(self, e, cmd, sender):
-        print("do")
-        c = self.connection
-
-        prompt = (f"{cmd}")
-        completions = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt=prompt,
-            max_tokens=1024,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        )
-
-        message = completions.choices[0].text
-        messager = message.replace('\n', ' ')
-        for line in textwrap.wrap(message, width=450):
-            c.privmsg(sender, line)
-        print(messager)
-
 
     def do_command(self, e, cmd):
         print("do")
